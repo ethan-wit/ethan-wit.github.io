@@ -1,3 +1,1 @@
-#Ethan-Wit github page
-
-ethan-wit github pages
+ethan-wit github page
