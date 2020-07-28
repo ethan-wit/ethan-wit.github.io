@@ -1,4 +1,4 @@
-[Ethan Wit](https://ethan-wit.github.io)
+# [Ethan Wit](https://ethan-wit.github.io)
 
 [GitHub](https://github.com/ethan-wit)
 
