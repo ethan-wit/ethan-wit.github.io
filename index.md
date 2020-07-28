@@ -14,6 +14,6 @@ Outlining the models that attempt to explain the determinants of economic growth
 
 Illustrating the flow of goods and services between sectors in the United States's macroeconomy using graph theory.
 
-### [Statistical Methods II](https://ethan-wit.github.io/Statistical_Methods_II.md)
+### [Statistical Methods II](https://ethan-wit.github.io/Statistical_Methods_II.html)
 
-
+Coursework for [Statistical Methods II](https://bit.ly/2FdL7oY) at Swarthmore College.
