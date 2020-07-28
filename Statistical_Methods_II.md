@@ -1,4 +1,4 @@
-## Statistical Methods II
+# Statistical Methods II
 [Homepage](https://ethan-wit.github.io)
 
 ---
