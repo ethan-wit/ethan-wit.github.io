@@ -1,4 +1,3 @@
-## [Ethan Wit](https://ethan-wit.github.io)
 [GitHub](https://github.com/ethan-wit)
 
 ---
@@ -14,5 +13,7 @@ Outlining the models that attempt to explain the determinants of economic growth
 ### [Graph Theory in Macroeconomics](https://ethan-wit.github.io/macro_graph.html)
 
 Illustrating the flow of goods and services between sectors in the United States's macroeconomy using graph theory.
+
+### [Statistical Methods II](https://ethan-wit.github.io/Statistical_Methods_II.md)
 
 
