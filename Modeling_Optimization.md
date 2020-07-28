@@ -19,3 +19,8 @@ Matrix manipulation and linear systems.
 [Instruction](https://ethan-wit.github.io/Assignments/Assignment%203%20Github/Assignment%203%20Instructions.pdf)
 
 Matrix manipulation and linear dynamical systems.
+
+### [Final Assignment](https://ethan-wit.github.io/ENGR_56_Final_Project.html)
+[Instruction](https://ethan-wit.github.io/Final%20Project%20Instructions.pdf)
+
+Constrained, multi-objective, and non-linear least squares.
