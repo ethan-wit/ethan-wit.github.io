@@ -16,6 +16,10 @@ Outlining the models that attempt to explain the determinants of economic growth
 
 Measures the impact of the New York City Department of Education lifting their electronic device ban on school academic performance.
 
+### [Internet Usage as a Predictor of Protest Violence in Western Nations](https://ethan-wit.github.io/Internet_Use_Protest.html)
+
+Investigates the relationship between internet usage and protest violence in Western nations.
+
 ### [Graph Theory in Macroeconomics](https://ethan-wit.github.io/macro_graph.html)
 
 Illustrating the flow of goods and services between sectors in the United States's macroeconomy using graph theory.
