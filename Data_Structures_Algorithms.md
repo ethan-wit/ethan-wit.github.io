@@ -29,7 +29,7 @@ ASCIImation using linked lists.
 
 ### [Lab 6](https://www.cs.swarthmore.edu/courses/CS35/S20/labs/06/)
 
-Maze solver using stacks, queues, bread-first search, and depth-first search.
+Maze solver using stacks, queues, breadth-first search, and depth-first search.
 
 ### [Lab 7](https://www.cs.swarthmore.edu/courses/CS35/S20/labs/07/)
 
