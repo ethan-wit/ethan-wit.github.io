@@ -38,6 +38,10 @@ Coursework for [Statistical Methods II](https://bit.ly/2FdL7oY) at Swarthmore Co
 
 Coursework for [Modeling & Optimization](https://bit.ly/2qU9BQE) at Swarthmore College.
 
+### [Data Structures & Algorithms](https://ethan-wit.github.io/Data_Structures_Algorithms)
+
+Coursework for [Data Structures & Algorithms](https://www.cs.swarthmore.edu/courses/CS35/S20/schedule.php) at Swarthmore College.
+
 ### [Scientific Computing](https://ethan-wit.github.io/Scientific_Computing.html)
 
 Coursework for [Scientific Computing](https://bit.ly/385sKjg) at Swarthmore College.
