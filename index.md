@@ -22,6 +22,10 @@ Illustrating the flow of goods and services between sectors in the United States
 
 Estimating display advertisement equilibrium price using two-stage least squares and SEM.
 
+### [Procurement](ethan-wit.github.io/Procurement.md)
+
+Whitepapers covering aspects of procurement -- the act of obtaining goods or services for business purposes.
+
 ## Working Papers
 
 ### [Electronic Device Bans and Academic Performance: New York City Public Schools](ethan-wit.github.io/EDB_NYC_AP.html)
