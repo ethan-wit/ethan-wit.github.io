@@ -3,11 +3,11 @@
 
 ---
 
-Whitepapers covering aspects of procurement $-$ the act of obtaining goods or services for business purposes.
+Whitepapers covering aspects of procurement -- the act of obtaining goods or services for business purposes.
 
 ---
 
-### [Procurement Theory](https://ethan-wit.github.io/procurement_files/Procurement Theory.md)
+### [Procurement Theory](https://ethan-wit.github.io/procurement_files/Procurement%20Theory.html)
 
 Obstacles and solutions to cost minimization in the procurement function.
 
