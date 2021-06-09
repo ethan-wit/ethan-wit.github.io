@@ -8,7 +8,7 @@
 
 ### [Moving Items](https://github.com/ethan-wit/moving-items)
 
-CLI CRUD app that allows users to track items they wish to bring while moving; written in Python with sqlite database.
+CLI CRUD app that allows users to track items they wish to bring while moving; written in Python, with a sqlite database.
 
 ### [Python Problem Sets](https://ethan-wit.github.io/Python_Problem_Sets.html)
 
