@@ -4,7 +4,17 @@
 
 ---
 
-## Projects
+## Software
+
+### [Moving Items](https://github.com/ethan-wit/moving-items)
+
+CLI CRUD app that allows users to track items they wish to bring while moving; written in Python with sqlite database.
+
+### [Python Problem Sets](https://ethan-wit.github.io/Python_Problem_Sets.html)
+
+Problem sets developed to teach core programming concepts in Python.
+
+## White Papers
 
 ### [Autoregressive Modeling](https://ethan-wit.github.io/Autoregressive_Modeling.html)
 
