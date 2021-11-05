@@ -6,15 +6,27 @@
 
 ## Software
 
+### [SEC Fund Data Extractor](https://ethan-wit.github.io/sec_fund_data_extractor.html)
+
+Python module that extracts mutual fund data from SEC filings
+
 ### [Moving Items](https://github.com/ethan-wit/moving-items)
 
 CLI CRUD app that allows users to track items they wish to bring while moving; written in Python, with a sqlite database.
+
+### [Outlook Attachment](https://ethan-wit.github.io/outlook_attachment_getter.html)
+
+Python module that gets Outlook attachments, unzips if necessary, and saves to disk.
 
 ### [Python Problem Sets](https://ethan-wit.github.io/Python_Problem_Sets.html)
 
 Problem sets developed to teach core programming concepts in Python.
 
 ## White Papers
+
+### [T+1 Fund Cash Flow Modeling](https://ethan-wit.github.io/fund_t+1_cash_flow_prediction_documentation.html)
+
+Describes the application of fixed effects modeling to T+1 fund cash flows.
 
 ### [Autoregressive Modeling](https://ethan-wit.github.io/Autoregressive_Modeling.html)
 
