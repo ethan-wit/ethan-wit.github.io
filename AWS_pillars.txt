@@ -1,0 +1,103 @@
+AWS:
+
+Five Pillars from Well-Architechted Framework:
+https://aws.amazon.com/getting-started/fundamentals-core-concepts/?e=gs2020&p=fundoverview&p=gsrc&c=fo
+
+1. Opertional Excellence
+	- IaC (Infrastructure as Code)
+		- yaml/json configuration files you write that specify AWS resources (e.g. # of task nodes)
+	- Observability
+		- log files/data from CloudWatch that monitor AWS resources
+
+2. Security
+	- IAM (Identitiy and Access Management)
+		- Three objects: principals (who), actions (do), resources (to what)
+		- Policies determine who (principal) can do something (actions) to something (resource)
+		- Employs principle of least privilege (only allow principals access to what is needed to complete task)
+	- Network Security
+		- Network-level:
+			- "defense in depth" -> security measure at each layer (IP, application, etc.)
+			- VPC (virtual private cloud) with subnets (multiple IP addresses) with one internet-facing IP
+		- Resource-level:
+			- only allow certain communication (e.g. a port) for specific resources (e.g. lambda or EC2)
+	- Encryption
+		- scramble information upon send-off, de-scramble information at receival (each side needs key)
+		- HTTPS endpoints for resources (e.g. database)
+		- encryption "at rest" (e.g. within your VPC)
+
+3. Reliability
+	- Fault Isolation
+		- Resource-level
+			- redundancy in resource (e.g. EC2)
+			- sharding
+		- Availability Zone-level
+			- multiple independent (e.g. power) facilities at same region
+		- Region
+			- possible (but only necessary for large clients) to have resources in multiple regions
+	- Limits
+		- maximum number of instances (e.g. EC2) for a given AWS account
+		- limits blast radius of software misconfiguration or malicious external attacks
+
+4. Performance Efficiency
+	- Selection of service
+		- Type of Service
+			- Compute
+				- Virtual Machine (VM)-based
+					- EC2 (core product)
+					- Elastic Beanstalk
+					- Lightsail
+				- Container-based
+					- ECS (e.g. Docker implementation)
+				- Serverless-based (abstracts provisioning)
+					- Lambda
+					- Fargate (serverless for ECS)
+			- Storage
+				- Block
+					- EBS
+				- File-based
+					- EFS
+				- Object-based
+					- S3 (Simple Storage Service)
+				- Archival
+					- S3 Glacier
+			- Database
+				- Relational
+					- RDS
+					- Aurora
+				- Non-relational
+					- DynamoDB
+				- Data warehouse
+					- Redshift
+			- Network
+		- Degree of Management
+			- Choosing service within category mainly depends on what level of management the use-case requires
+		- Configuration
+			- Choosing parameter of service (e.g. size of instance -> t3.small, t3.large, block-storage type -> solid-state, hard drive) affects performance
+	- Scaling
+		- Vertical
+			- increasing instance size (e.g. t3.small -> t3.large)
+			- easier to implement but max compute limited by number of instances
+		- Horizontal
+			- increasing number of instances (e.g. 2 t3.small instances to 4)
+			- more difficult to implement (proxy, routing) but no max compute
+
+5. Cost Optimization
+	- Pay for use
+		- Right-sizing
+			- Match resources to requirement (Opex instead of mainframe Capex)
+		- Serverless
+			- only pay when compute is executed (e.g. Lambda)
+		- Reservations
+			- discounts if you reserve compute instances
+		- Spot instances
+			- large discounts if you use spot instances that can be reclaimed by AWS at any time
+	- Cost Optimization Lifecycle
+		- Review
+			- (similar to observability from operational excellence)
+			- know and visualize cost and usage across time
+		- Track
+			- allocate usage and cost to users, applications, cost centers/departments, etc.
+			- create usage/cost budgets
+		- Optimize
+			- change instances/configuration based on budget
+

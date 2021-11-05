@@ -1,0 +1,31 @@
+Mongodb:
+
+Structure
+
+1. mongod 
+	- daemon (background process program) that performs all server functions (e.g. taking in client requests, serving responses, etc.)
+
+2. database
+	- group of collections
+	- mongod can have multiple databases
+
+3. collection
+	- group of documents
+
+4. document (json)
+	- group of fields
+
+5. field
+	- key-value pair
+	- value can be an array
+
+6. array
+	- group of items
+
+
+Other
+
+index
+	- forces existence (if it's not a sparse index) and uniqueness of values (null if doesn't exist) for a particular key in a collection
+	- allows unambiguous query of said keys
+	- mongo automatically creates an index on the _id key (similar to row_id in sqlite), but more indexes can be created
