@@ -3,7 +3,7 @@
 
 ---
 
-Python module that extracts mutual fund data from SEC filings.
+CRUD app that extracts mutual fund data from SEC filings; written in Python, with a sqlite database.
 
 ---
 
