@@ -8,7 +8,7 @@
 
 ### [SEC Fund Data Extractor](https://ethan-wit.github.io/sec_fund_data_extractor.html)
 
-CRUD app that extracts mutual fund data from SEC filings; written in Python, with a sqlite database.
+CLI app that extracts mutual fund data from SEC filings; written in Python, with a sqlite database.
 
 ### [Moving Items](https://github.com/ethan-wit/moving-items)
 
