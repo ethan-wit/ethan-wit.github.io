@@ -12,7 +12,7 @@ CLI app that extracts mutual fund data from SEC filings; written in Python, with
 
 ### [Payment Terms Value Calculator](http://paymenttermsvaluecalculator-env.eba-dgms7m2x.us-east-2.elasticbeanstalk.com/)
 
-Web app that decides the most favorable contract from a set of [payment terms](https://ethan-wit.github.io/procurement_files/PTOM.html); written in Python, served with Flask, and deployed on AWS.
+Web app that decides the most favorable contract from a set of [payment terms](https://ethan-wit.github.io/procurement_files/PTOM.html); written in Python and deployed on AWS.
 
 ### [Moving Items](https://github.com/ethan-wit/moving-items)
 
