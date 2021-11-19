@@ -13,4 +13,4 @@ Notes on various software items.
 
 ### [Elastic Beanstalk Deployment](https://ethan-wit.github.io/eb_console_python_app_deployment.txt)
 
-Directions to deploy a Python flask application using the AWS Elastic Beanstalk console.
+Directions to deploy a Python Flask application using the AWS Elastic Beanstalk console.
