@@ -3,7 +3,7 @@
 
 ---
 
-Notes are various software items.
+Notes on various software items.
 
 ---
 
