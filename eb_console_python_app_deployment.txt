@@ -1,0 +1,23 @@
+Python Flask app AWS Elastic Beanstalk (EB) Console Deployment Directions
+
+1. Develop Flask app
+	- Create either conda environment or virtualenv; install dependencies
+	- Use waitress as WSGI production server, as Flask development server cannot handle high traffic and is insecure
+	- Name application "application.py" as this is what EB searches for by default
+	
+2. Declare Python dependencies
+	- pip freeze > requirements.txt
+
+3. Configure
+	- Make .ebextensions folder
+	- Make python.config file within folder, with the following specs:
+	
+	options_settings:
+    		"aws:elasticbeanstalk:container:python":
+        		WSGIPath: application:application
+
+4. Zip directory
+	- Control-click app, requirements.txt, and .ebextensions 
+	- Compress above items into zip file
+
+5. Upload zip file to Elastic Beanstalk console
