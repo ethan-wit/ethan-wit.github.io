@@ -28,4 +28,5 @@ Guide to install Xubuntu 20.04 on a [Mac mini (Late 2014)](https://support.apple
   - Insert the USB drive into the Mac mini. 
   - If you receive the pop-up "The disk you inserted was not readable by this computer", click "Initialize". This will open the "Disk Utility" program, and then you should verify the disk. If the prompt outputs "0", you can proceed.
   - Restart the computer, and immediately after hearing the start-up tone, hold the Option/Alt button on your keyboard. This will open the bootloader.
-  - Click "Try Xubuntu". This will load Xbuntu, and you can fully install the OS by clicking the "Install Xubuntu" icon on the desktop at any time.
+  - You will have the option to boot Mac OS or EBI. To load Xubuntu, click EBI.
+  - Click "Try Xubuntu". This will load Xubuntu, and you can fully install the OS by clicking the "Install Xubuntu" icon on the desktop at any time.
