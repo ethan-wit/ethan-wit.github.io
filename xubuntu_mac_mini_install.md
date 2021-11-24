@@ -30,3 +30,8 @@ Guide to install Xubuntu 20.04 on a [Mac mini (Late 2014)](https://support.apple
   - Restart the computer, and immediately after hearing the start-up tone, hold the Option/Alt button on your keyboard. This will open the bootloader.
   - You will have the option to boot Mac OS or EBI. To load Xubuntu, click EBI.
   - Click "Try Xubuntu". This will load Xubuntu, and you can fully install the OS by clicking the "Install Xubuntu" icon on the desktop at any time.
+
+6. Connecting to the Internet
+  - If your router does not appear under the "Network Manager" icon in the top right of the ribbon, you will need to install its driver.
+  - To do so, connect to your router with an Ethernet cable. 
+  - Click the top left icon, go to Settings > Additional Drivers. Select "Using <driver>" and then "Apply changes". This will install the driver, and you should then find your router when you select the "Network Manager".
