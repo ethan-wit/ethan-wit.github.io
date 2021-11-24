@@ -26,9 +26,9 @@ Python module that gets Outlook attachments, unzips if necessary, and saves to d
 
 Problem sets developed to teach core programming concepts in Python.
 
-### [Notes](https://ethan-wit.github.io/software_notes.html)
+### [Notes & Guides](https://ethan-wit.github.io/software_notes.html)
 
-Notes on various software items: AWS, mongodb, etc.
+Notes and guides on various software items: Xubuntu, AWS, etc.
 
 ## White Papers
 
