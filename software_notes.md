@@ -1,4 +1,4 @@
-# Notes
+# Notes & Guides
 [Homepage](https://ethan-wit.github.io)
 
 ---
@@ -14,3 +14,7 @@ Notes on various software items.
 ### [Elastic Beanstalk Deployment](https://ethan-wit.github.io/eb_console_python_app_deployment.txt)
 
 Directions to deploy a Python Flask application using the AWS Elastic Beanstalk console.
+
+### [Installing Xubuntu on a Mac Mini](https://ethan-wit.github.io/xubuntu_mac_mini_install.md)
+
+Guide to installing Xubuntu on a Mac Mini (Late 2014 model).
