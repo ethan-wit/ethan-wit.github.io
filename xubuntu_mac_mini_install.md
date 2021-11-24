@@ -13,7 +13,7 @@ Guide to install Xubuntu 20.04 on a [Mac mini (Late 2014)](https://support.apple
 
 2. Acquire a USB Drive
 
-  - I used the [Sandisk Utra Fit USB 3.1 Flash Drive](https://www.westerndigital.com/products/usb-flash-drives/sandisk-ultra-fit-usb-3-1#SDCZ430-016G-G46); 16 GB should work fine.
+  - I used the [Sandisk Ultra Fit USB 3.1 Flash Drive](https://www.westerndigital.com/products/usb-flash-drives/sandisk-ultra-fit-usb-3-1#SDCZ430-016G-G46); 16 GB should work fine.
 
 3. Install [balenaEtcher](https://www.balena.io/etcher/) 
 
