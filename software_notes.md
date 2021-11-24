@@ -15,6 +15,6 @@ Notes on various software items.
 
 Directions to deploy a Python Flask application using the AWS Elastic Beanstalk console.
 
-### [Installing Xubuntu on a Mac Mini](https://ethan-wit.github.io/xubuntu_mac_mini_install.md)
+### [Installing Xubuntu on a Mac Mini](https://ethan-wit.github.io/xubuntu_mac_mini_install.html)
 
 Guide to installing Xubuntu on a Mac Mini (Late 2014 model).
