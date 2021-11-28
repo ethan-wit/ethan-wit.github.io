@@ -40,6 +40,7 @@ Guide to install Xubuntu 20.04 on a [Mac mini (Late 2014)](https://support.apple
 ### 7. Set up Git
   - Follow instructions [here](https://docs.github.com/en/get-started/quickstart/set-up-git) to set up Git locally.
   - I configured the username to be the same as my GitHub account, and the email to be the noreply email address given to me by GitHub.
+  - GitHub no longer supports password authentication for local pushes; create a personal access token using this [guide](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
 ### 8. Install Visual Studio Code
   - I decided to install the snap file as opposed to the deb file. Instruction can be found [here](https://linuxize.com/post/how-to-install-visual-studio-code-on-ubuntu-20-04/), and a brief discussion on snap vs apt can be found [here](https://phoenixnap.com/kb/snap-vs-apt).
