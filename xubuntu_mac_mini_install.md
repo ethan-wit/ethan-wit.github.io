@@ -35,3 +35,11 @@ Guide to install Xubuntu 20.04 on a [Mac mini (Late 2014)](https://support.apple
   - If your router does not appear under the "Network Manager" icon in the top right of the ribbon, you will need to install its driver.
   - To do so, connect to your router with an Ethernet cable. 
   - Click the top left icon, go to Settings > Additional Drivers. Select "Using <driver>" and then "Apply changes". This will install the driver, and you should then find your router when you select the "Network Manager".
+
+
+### 7. Set up Git
+  - Follow instructions [here](https://docs.github.com/en/get-started/quickstart/set-up-git) to set up Git locally.
+  - I configured the username to be the same as my GitHub account, and the email to be the noreply email address given to me by GitHub.
+
+### 8. Install Visual Studio Code
+  - I decided to install the snap file as opposed to the deb file. Instruction can be found [here](https://linuxize.com/post/how-to-install-visual-studio-code-on-ubuntu-20-04/), and a brief discussion on snap vs apt can be found [here](https://phoenixnap.com/kb/snap-vs-apt).
