@@ -19,6 +19,6 @@ Directions to deploy a Python Flask application using the AWS Elastic Beanstalk 
 
 Guide to installing Xubuntu on a Mac Mini (Late 2014 model).
 
-### [Hiding Items in Public Repositories](https://ethan-wit.github.io/ignore_files_git.md)
+### [Hiding Items in Public Repositories](https://ethan-wit.github.io/ignore_files_git.html)
 
 Guide to de-clutter public repositories.
