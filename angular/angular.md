@@ -189,8 +189,24 @@ The parent HTML template:
 
 ## Routing
 
-The steps needed to route throughout the application is dependent on the application directory structure. The following is for the example [here](https://angular.io/start). One needs x items to perform routing for a new component: a child Component to be routed to, a link within the parent Component, and a URL-Component declaration in the app module Typescript file. 
+The steps needed to route throughout the application is dependent on the application directory structure. The following is for the example [here](https://angular.io/start). One needs three items to perform routing for a new component: a child Component to be routed to, a link within the parent Component, and a URL-Component declaration in the app module Typescript file. Imagine the child Component is named child-component.ts; the URL-Component would be the below:
 
+```
+import {ChildComponent} from 'src/child/child-component'; 
+
+@NgModule({
+    imports([
+        {path: '', component: 'RandomComponent'} \\The RandomComponent is presented at the base URL
+        {path: '\child', component: 'ChildComponent'} \\The ChildComponent is presented when \child is appended to the base URL 
+    ])
+})
+```
+
+The parent Component HTML template would be below:
+
+```
+<a [routerLink]="child">Link to Child</a>
+```
 
 ## Directives
 
