@@ -1,0 +1,45 @@
+O'Reilly Running Linux Fourth Edition 
+
+See link for installation:
+https://ethan-wit.github.io/xubuntu_mac_mini_install.html
+
+3.2 Post-Installation Procedures
+
+3.2.1.
+Accounts:
+
+- root user
+	- access to entire file system
+	- system administration account; most privileges
+
+3.2.2
+Help:
+
+- manual pages; "man pages"
+- to get man page for a command or program:
+
+$ man <command/program>
+
+Directories:
+
+- /
+	- root
+- /usr 
+	- contains all programs/data that users can use
+- /home/<user>
+	- files that <user> can perform CRUD operations on
+
+File system:
+
+- A file system needs to be mounted to a directory for it to be accessed
+	- "mounting"  associates the file system with a directory
+
+3.2.4.
+Shutting down:
+
+- Don't turn power off 
+- Instead use the shutdown command:
+
+$ shutdown -h now
+
+
