@@ -28,7 +28,7 @@ Problem sets developed to teach core programming concepts in Python.
 
 ### [Notes & Guides](https://ethan-wit.github.io/software_notes.html)
 
-Notes and guides on various software items: Xubuntu, AWS, etc.
+Notes and guides on various software items: Angular, Typescript, Xubuntu, AWS, etc.
 
 ## White Papers
 
