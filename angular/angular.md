@@ -18,6 +18,15 @@ A website is a domain that serves files to users, upon their request. Generally,
 4. Install Angular CLI
     - ```npm install -g @angular/cli```
 
+
+### Creating a new Angular application
+
+Execute the following command in Angular CLI to create a new Angular application:
+
+```
+ng new <name-of-app>
+```
+
 ## Basics
 
 As mentioned, Angular is built with Typescript. One imports classes (e.g. Component) from angular modules (e.g. angular/core) in Typescript files to build their web application frontend. The key component of an Angular app is called a Component. A Component consists of the Component class from angular/core, a developer-written class with an @Component decorator, an HTML template, and some styling (CSS). Below, you'll find an example of a Component:
@@ -62,11 +71,46 @@ Execute the following command in Angular CLI to create a new Component:
 ng generate component <name-of-component>
 ```
 
-This will create a new directory with three files: Typescript, HTML, and CSS. All three files will be specific to the Component.
+This will create a new directory with three files: Typescript, HTML, and CSS. All three files will be specific to the Component. It will also declare the Component in module.ts.
+
+
+### Directory Structure
+
+The flow of information between Components and finally to the user can be confusing. Something to remember is that single-page applications are meant to display series of information to users, without having the user request and load new HTML files. The index.html file is the HTML file; it declares the HTML tag, head tag, and body tag. It also has a tag called app-root. app-root is the selector for the root Component, called AppComponent. Within the app.component.html file, which is the HTML template associated with this root Component, there is generally a router-outlet tag. The router-outlet tag displays child Components of the root (aka parent) Component, based on your routing configuration. Routing is discussed [below](#routing). The app.component.html file may also have a nav-bar tag above the router-outlet tag, which will place a navigation bar at the top of app.component.html (and thus index.html if there are no tags above app-root), regardless of which child Component is being displayed. 
+
+
+### Serving an Angular app
+
+Serve an Angular app by executing the below in the Angular CLI:
+
+```
+ng serve
+```
+
+## Routing
+
+
+Routing allows one to present Components based on the application URL path. When generating a new Angular app, you have the option to add Angular routing or not. The below works for choosing not to include Angular routing; it's counterintuitive, but you can perform routing with this configuration. A useful and official guide can be found [here](https://angular.io/guide/router-tutorial). First, the index.html file should have the app-root and the app.component.html file should have the router-outlet tag, as per the Directory Structure section above. Create a new child Component, as per the directions above. After doing so, alter the app.module.ts file to include the routing configuration below:
+
+```
+@NgModule({
+    imports([
+        {path: '', component: 'AppComponent'}, \\The AppComponent is presented at the base URL
+        {path: 'child', component: 'ChildComponent'} \\The ChildComponent is presented when \child is appended to the base URL 
+    ])
+})
+```
+
+You can replace the AppComponent with a child Component, if you'd like that to be shown at the base URL. TODO: include redirects. If you'd like to include a link to another Component's URL, you can include the below in an HTML template (routerLink value is the other Component's URL from the base):
+
+```
+<a [routerLink]="other">Link to other</a>
+```
 
 
 ## Binding
 
+Binding allows one to pass information between the sub-components of a Component. Property binding lets one assign HTML object properties from the Typescript file, event binding lets one call a Typescript method from an action on the HTML template, and the @Input and @Output decorators let one pass information between Components.
 
 ### Property Binding
 
@@ -185,27 +229,6 @@ The parent HTML template:
 
 ```
 <app-notification (notifier)='notify()'>
-```
-
-## Routing
-
-The steps needed to route throughout the application is dependent on the application directory structure. The following is for the example [here](https://angular.io/start). One needs three items to perform routing for a new component: a child Component to be routed to, a link within the parent Component, and a URL-Component declaration in the app module Typescript file. Imagine the child Component is named child-component.ts; the URL-Component would be the below:
-
-```
-import {ChildComponent} from 'src/child/child-component'; 
-
-@NgModule({
-    imports([
-        {path: '', component: 'RandomComponent'} \\The RandomComponent is presented at the base URL
-        {path: '\child', component: 'ChildComponent'} \\The ChildComponent is presented when \child is appended to the base URL 
-    ])
-})
-```
-
-The parent Component HTML template would be below:
-
-```
-<a [routerLink]="child">Link to Child</a>
 ```
 
 ## Directives
