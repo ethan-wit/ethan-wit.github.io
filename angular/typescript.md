@@ -93,6 +93,13 @@ Including a question mark before type assignment allows the property to be optio
 price ?: number;
 ```
 
+Including a [] after type assignment forces the property to be an array of the type (the below are equivalent):
+
+```
+prices: number[];
+prices: Array<number>;
+```
+
 Given the default tsconfig.json (typescript configuration file, which declares the strictness of the type checking), you will need to declare the types of object properties. Official documentation can be found [here](https://www.typescriptlang.org/docs/handbook/2/objects.html). For example, we have an interface that does this:
 
 ```

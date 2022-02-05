@@ -231,6 +231,13 @@ The parent HTML template:
 <app-notification (notifier)='notify()'>
 ```
 
+## Services
+
+A Service allows one to persist information across Components and provide methods for each of the Components to use. Essentially, a Service lets you implement logic and save data, without being attached to an HTML template.
+
+- import service into Components using it
+- Create Service methods to be called, properties that can store Component data
+
 ## Directives
 
 ngFor
