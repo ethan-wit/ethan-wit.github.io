@@ -15,5 +15,19 @@ According to Varian, Shephard gave cost functions "the most systematic treatment
 
 John C held 55 patents, and started the Lincoln Electric Company in 1895. LEC was initially a vehicle for John C to manufacture and sell his electric motor designs, however, the company now operates mainly in the arc welding machinery industry. By 1943, LEC captured half the US and a quarter of the world arc welding market. Lincoln Electric implemented numerous innovative policies in corporate finance and management. The most notable was the piecework plan implemented in 1914, whereby workers in the plant were paid for each unit of output they produced. The piece rate was inversely proprotional to the time it took a worker to produce one unit. This was put in place to incentivize workers to increase the returns from labor, holding capital constant. 
 
+## Isaac Newton
+
+## Francis Bacon
+
+## Eric Betzig
+
+https://physics.berkeley.edu/resources/public-lecture-videos/imaging-life-at-high-spatiotemporal-resolution-1326
+
+## Eric Raymond
+
+## George Hotz
+
+
+
 
 
