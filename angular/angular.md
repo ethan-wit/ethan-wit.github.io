@@ -240,7 +240,83 @@ A Service allows one to persist information across Components and provide method
 
 ## Directives
 
-ngFor
-ngIf
+There are three types of directives in the Angular framework: Components, structural directives, and attribute directives.
+
+### Structural Directives
+
+Angular has multiple built-in structural directives that allow a developer to include or exclude elements in the DOM based on some logic. 
+
+#### ngIf
+
+ngIf displays an element if the condition evaluates to true. ngIf can be evaluated against any valid Typescript expression. The example below would include the element. Someting to note -- this does not only hide the element, like the HTML hidden attribute, but actually includes or exclude it.
+```
+determineIfInclude: boolean = true;
+```
+
+```
+<div *ngIf="determineIfInclude">
+    <p>
+    Element is included.
+    </p>
+<\div>
+```
+
+The asterisk before ngIf is the short-hand form of the syntax. Without this, the developer needs to include ngIf in brackets in an ng-template element, like the below example:
+
+```
+<ng-template [ngIf]="determineIfInclude">
+    <div>
+        <p>
+        Element is included.
+        </p>
+    <\div>
+<ng-template>
+```
+
+ngIf also allows for else logic, using ng-template as the element to include if the else condition is reached. Below is an example of the else element being included.
+
+```
+determinIfInclude: boolean = false; 
+```
+
+```
+<div *ngIf="determineIfInclude; else includeThis">
+    <p>
+    Element 1 is included.
+    </p>
+<\div>
+<ng-template #includeThis>
+    <p>
+    Element 2 is included.
+    </p>
+</ng-template>
+```
+
+#### ngFor
+
+ngFor will iterate over a data structure (e.g. Array), allowing the developer to include or exclude an element for each item in the data structure. Below is an example:
+
+```
+dataStructure: Array<string> = ["first", "second", "third"]
+```
+
+```
+<div *ngFor=let item in dataStructure">
+    <p>
+    {{item}}
+    </p>
+</div>
+```
+
+ngFor can be used with ngIf to include elements in the data structure, with additional logic; see example below.
+
+```
+<div *ngFor="let item in dataStructure">
+    <p *ngIf="item === 'first' || item === 'third'">
+        {{item}}
+    </p>
+</div>
+```
+
 
 
