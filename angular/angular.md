@@ -244,7 +244,7 @@ There are three types of directives in the Angular framework: Components, struct
 
 ### Structural Directives
 
-Angular has multiple built-in structural directives that allow a developer to include or exclude elements in the DOM based on some logic. 
+Angular has multiple built-in structural directives that allow a developer to include or exclude elements in the DOM based on some logic. I'll highlight the two most popular below: ngIf and ngFor.
 
 #### ngIf
 
@@ -317,6 +317,62 @@ ngFor can be used with ngIf to include elements in the data structure, with addi
     </p>
 </div>
 ```
+
+ngFor also provides local variable tracking for specific cases, such as indexing. The below directive provides the index of each item in the data structure:
+
+```
+<div *ngFor="let item in dataStructure; index as idx">
+    <table>
+        <tr>
+            <td>{{idx}}</td>
+            <td>{{item}}</td>
+        </tr>
+    </table>
+</div>
+```
+
+Other cases include first/last and odd/even, which can be found [here](https://angular.io/api/common/NgForOf#local-variables). The trackBy local variable is used to facilitate the rerender of elements in the ngFor based on a change in a specified data structure property; without the use of trackBy, every element in ngFor will be rerendered if any given item in the data structure is changed. Below is an example of using trackBy, which rerenders an element if its price has changed. 
+
+```
+export interface Item {
+    id: number;
+    name: string;
+    price: number;
+}
+```
+
+```
+items: Array<Item> = [
+    {
+        id: 1
+        name: "5mod shirt"
+        price: 7
+    },
+    {
+        id: 2
+        name: "peggy shirt"
+        price: 10
+    }
+]
+
+trackPrice (index: number, item: Item): number {
+    return item.price
+}
+```
+
+```
+<div *ngFor="let item in items; trackBy: trackPrice>
+    <table>
+        <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.price}}</td>
+        </tr>
+    </table>
+</div>
+```
+
+
+
 
 
 
