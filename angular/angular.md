@@ -371,6 +371,66 @@ trackPrice (index: number, item: Item): number {
 </div>
 ```
 
+## Pipes
+
+A pipe transforms any valid Typescript data structure to a specified format in the HTML template, without changing the data structure itself. The pipe syntax follows this pattern: {{value | format: configuration}}. There are many built-in pipes, such as date, currency, percent, json, etc. An example is below:
+
+```
+price: number = 5.01;
+```
+
+```
+<div>
+    {{price | currency: 'USD'}}
+</div>
+```
+
+You can also create custom pipes, by executing the below in the Angular CLI, in the directory you want the pipe to live:
+
+```
+ng generate pipe <name-of-pipe>
+```
+
+This will generate a Typescript class with pipe decorator; you must also implement the transform method from the PipeTransform interface, as shown below:
+
+```
+@Pipe({
+    name: 'add-sub-num'
+})
+export class addSubNumPipe {
+
+    transform (value: number, addNum: number, subNum: number) {
+        return value + addNum - subNum
+    }
+}
+```
+
+```
+val: number = 10;
+```
+
+```
+<div>
+    {{val | add-num:5:10}}
+</div>
+```
+
+Pipes are pure by default, although they can also be set to impure, as shown below:
+
+```
+@Pipe({
+    name: 'add-sub-num'
+    pure: false
+})
+```
+
+A pure pipe is rerendered only when Angular detects a change to the value or parameters of the pipe. This excludes when the value is an object and one of its properties are changed. However, it would rerender if the value is assigned to a new object. It also excludes adding a new item to an Array that is the value. Impure pipes rerender upon a change to any state change in the Angular application, which forces more computation on the machine running the application. One other note of importance, is that pure pipes can be reused, while each time an impure pipe is applied, a new pipe instance will be created. 
+
+
+
+
+
+
 
 
 
