@@ -361,7 +361,7 @@ trackPrice (index: number, item: Item): number {
 ```
 
 ```
-<div *ngFor="let item in items; trackBy: trackPrice>
+<div *ngFor="let item in items; trackBy: trackPrice">
     <table>
         <tr>
             <td>{{item.name}}</td>
@@ -371,7 +371,7 @@ trackPrice (index: number, item: Item): number {
 </div>
 ```
 
-## Pipes
+### Pipes
 
 A pipe transforms any valid Typescript data structure to a specified format in the HTML template, without changing the data structure itself. The pipe syntax follows this pattern: {{value | format: configuration}}. There are many built-in pipes, such as date, currency, percent, json, etc. An example is below:
 
@@ -425,6 +425,72 @@ Pipes are pure by default, although they can also be set to impure, as shown bel
 ```
 
 A pure pipe is rerendered only when Angular detects a change to the value or parameters of the pipe. This excludes when the value is an object and one of its properties are changed. However, it would rerender if the value is assigned to a new object. It also excludes adding a new item to an Array that is the value. Impure pipes rerender upon a change to any state change in the Angular application, which forces more computation on the machine running the application. One other note of importance, is that pure pipes can be reused, while each time an impure pipe is applied, a new pipe instance will be created. 
+
+### Custom Directives
+
+You can create custom directives using the below command. They are generally used when there is reusable functionality that isn't associated with a specific feature.
+
+```
+ng generate directive <name-of-directive>
+```
+
+The directive Typescript file will be placed in the directory you executed the command. Remember, components are directives with an associated template, so custom directives are apt to be used when you need to add functionality to an element, but an entire template can't be justified. 
+
+#### Attribute Directive
+
+A footer may be an example:
+
+```
+@Directive({
+    selector: ['appFooter']
+})
+export class FooterDirective {
+
+    constructor(element: ElementRef, renderer Renderer2) {
+        /**renderer.addClass(element.nativeElement, 'footer');**/
+        /**above sets CSS footer class in styles.css to this element's class property**/
+        renderer.setProperty(
+            element.nativeElement,
+            'textContent',
+            `Webpage Footer`
+        );
+    }
+}
+```
+
+```
+<p appFooter></p>
+```
+
+There are two decorators that provide additional functionality when creating attribute directives: @HostBinding and @HostListener. @HostBinding allows an element property to be set to a Typescript attribute, using the following syntax (specific for class property, syntax differs for other properties):
+
+In styles.css:
+
+```
+.greentext {
+    color: green
+}
+```
+
+In the directive class:
+
+```
+@HostBinding('class')
+elementClass: string = 'greentext';
+```
+
+@HostListener allows an event to trigger a method execution, using the following syntax:
+
+```
+keyPressCounter: number = 0;
+
+@HostListener('keypress', ['$event'])
+incrementKeyPressCounter(event: KeyBoardEvent) {
+    keyPressCounter += 1;
+}
+```
+
+@HostListener can be useful when there is no element associated with an event, such as a window enter. It (as well as @HostBinding) can also be used in components. A good comparative for these bindings can be found [here](https://stackoverflow.com/questions/37965647/hostbinding-and-hostlistener-what-do-they-do-and-what-are-they-for).
 
 
 
