@@ -18,7 +18,6 @@ A website is a domain that serves files to users, upon their request. Generally,
 4. Install Angular CLI
     - ```npm install -g @angular/cli```
 
-
 ### Creating a new Angular application
 
 Execute the following command in Angular CLI to create a new Angular application:
@@ -73,12 +72,6 @@ ng generate component <name-of-component>
 
 This will create a new directory with three files: Typescript, HTML, and CSS. All three files will be specific to the Component. It will also declare the Component in module.ts.
 
-
-### Directory Structure
-
-The flow of information between Components and finally to the user can be confusing. Something to remember is that single-page applications are meant to display series of information to users, without having the user request and load new HTML files. The index.html file is the HTML file; it declares the HTML tag, head tag, and body tag. It also has a tag called app-root. app-root is the selector for the root Component, called AppComponent. Within the app.component.html file, which is the HTML template associated with this root Component, there is generally a router-outlet tag. The router-outlet tag displays child Components of the root (aka parent) Component, based on your routing configuration. Routing is discussed [below](#routing). The app.component.html file may also have a nav-bar tag above the router-outlet tag, which will place a navigation bar at the top of app.component.html (and thus index.html if there are no tags above app-root), regardless of which child Component is being displayed. 
-
-
 ### Serving an Angular app
 
 Serve an Angular app by executing the below in the Angular CLI:
@@ -110,7 +103,7 @@ You can replace the AppComponent with a child Component, if you'd like that to b
 
 ## Binding
 
-Binding allows one to pass information between the sub-components of a Component. Property binding lets one assign HTML object properties from the Typescript file, event binding lets one call a Typescript method from an action on the HTML template, and the @Input and @Output decorators let one pass information between Components.
+Binding allows one to pass information between the files in a Component, or between Components. Property binding lets one assign HTML object properties from the Typescript file, event binding lets one call a Typescript method from an action on the HTML template, and the @Input and @Output decorators let one pass information between Components.
 
 ### Property Binding
 
@@ -119,8 +112,21 @@ Official documentation can be found [here](https://angular.io/guide/property-bin
 ```
 <img [src]="imageURL">
 ```
+
 ```
 imageURL = "../assets/image.png";
+```
+
+You can also use a technique called interpolation to set the property of an element. Interpolation takes a Typescript expression, evaluates it, and converts it to a string to be assigned to the element property. Below is an example of interpolation on the paragraph element's innerText property:
+
+```
+account: number = 000612;
+```
+
+```
+<p>
+    {{account}}
+</p>
 ```
 
 ### Event Binding
@@ -301,7 +307,7 @@ dataStructure: Array<string> = ["first", "second", "third"]
 ```
 
 ```
-<div *ngFor=let item in dataStructure">
+<div *ngFor="let item in dataStructure">
     <p>
     {{item}}
     </p>
@@ -492,9 +498,41 @@ incrementKeyPressCounter(event: KeyBoardEvent) {
 
 @HostListener can be useful when there is no element associated with an event, such as a window enter. It (as well as @HostBinding) can also be used in components. A good comparative for these bindings can be found [here](https://stackoverflow.com/questions/37965647/hostbinding-and-hostlistener-what-do-they-do-and-what-are-they-for).
 
+## Application Structure
 
+Simple Angular applications are a tree of components. For example, you may have a component for a web application page that takes in user input and returns a response based on the input. The above component could have two child components, one for the user input and another for the response. One item to note is the parent-child relationship exists when one component selector (child) is placed within another component's selector (parent) in an HTML file. This hierarchy is separate from the extends keyword used in building hierarchies of Typescript classes. 
 
+### Base Configuration
 
+The flow of information between components and finally to the user can be confusing. Something to remember is that single-page applications are meant to display series of information to users, without having the user request and load new HTML files. The index.html file is the HTML file; it declares the HTML tag, head tag, and body tag. It also has a tag called app-root. app-root is the selector for the root component, called AppComponent, which is located in the root module (app directory). Within the app.component.html file, which is the HTML template associated with this root component, there is generally a router-outlet tag. The router-outlet tag displays components based on your routing configuration. Routing is discussed [below](#routing).
+
+### Modules
+
+Angular provides another entity to more clearly separate the components of the application: the module. Each Angular application is configured with a root module, app.module.ts, with the associated app directory in src. Feature modules are prevalent in larger Angular applications, which represent a collection of Angular artifacts (e.g. pipes, directives, componenets) aligned to a domain or workflow, such as inventory, cart, and checkout in a web store. You create another module, like a feature module (given its own directory with associated Typescript file within app), by executing the command below:
+
+```
+ng generate module <name-of-module>
+```
+
+app.name-of-module.ts declares multiple items: declarations (artifacts located in module), imports (other modules for which the module can use their exported artifacts), exports (artifacts located in module that are available to other modules), providers (services located in module that are available to other modules). app.module.ts also includes the bootstrap item, which declares the component that is rendered when the application is initially served to a client. 
+
+Something to note is the imports and exports above and below the @NgModule decorator are not associated with Angular-specific import and exports; they are javascript imports and exports. 
+
+There are other classifications of modules outside of the root and feature modules, two are core and shared modules. Core modules contain artifacts used across the application, such as a nav-bar, and shared modules are utilities that are used by feature modules, but aren't aligned to a specific feature, such as a custom pipe.
+
+To create an artifact that is declared in a specific module, generate it in the module directory or use the --module=name-of-module postfix. An example is below:
+
+```
+ng generate component --module=checkout
+```
+
+### Non-app items
+
+There are other items found in an Angular project, outside the app directory. The favicon.ico file is the icon that will be shown in the browser tab. There are multiple configuration files, such as angular.json, that each configure a portion of the Angular project. The environments directory declares environments for which the Angular application can be executed; pre-set environments are development and production. Environments allow us to test the application in different scenarios. For example, you develop the application on a Linux machine with wide monitor, but the user may be using Safari on an iOS device. Environments let us test the application in these different cases. The angular.json configurations > architect > environment-name value determines which environment is used when an Angular command is executed:
+
+```
+ng <name-of-command> --configuration=<name-of-environment>
+```
 
 
 
