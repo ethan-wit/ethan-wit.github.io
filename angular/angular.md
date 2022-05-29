@@ -534,9 +534,110 @@ There are other items found in an Angular project, outside the app directory. Th
 ng <name-of-command> --configuration=<name-of-environment>
 ```
 
+### Dependency Injection
 
+Dependency injection is a simple design pattern: pass **instantiated** objects (dependencies) to the object constructor, as opposed to instantiating objects (dependencies) within the object. Angular components are responsible for one task: presenting content to the client. This does not include retrieving data from a database or executing complex business logic. The later two tasks, and any others that are not presentation-centric, are delegated to another Angular entity: services. Dependency injection allows us to decouple objects and implement unit tests with mocking.
 
+#### Services
 
+Services perform non-presentation tasks and are injected into components before being called on to perform their tasks. You create a service by executing the below command, in the module directory associated with the service:
 
+```
+ng generate service <name-of-service>
+```
+
+A service is a Typescript file/class with the @Injectable decorator. An important point to note: services are not registered with modules by default, they are registered with an injector. A reasonable method to include in a service is a data getter method, like the below, which is registered with the root injector:
+
+```
+interface Item = {
+    id: number;
+    name: string;
+    price: number;
+}
+```
+
+```
+@Injectable({
+    providedIn: 'root'
+})
+export class cartManager {
+
+    getCartItems(): Array<Item> {
+        return [
+            {
+                id: 1;
+                name: "5mod shirt";
+                price: 7;
+            },
+            {
+                id: 2;
+                name: "peggy shirt";
+                price: 10;
+            }
+        ]   
+    }
+}
+```
+
+Instead of the return object being hard-coded, it will generally be retrieved from a database or other data structure. Now, the CartManager service can be injected into the CartPresenter component, so that the CartPresenter can present cart items to the client:
+
+```
+@Component({
+    ...
+})
+export class CartPresenter {
+
+    cart: Array<Items>;
+
+    constructor(cartManager: CartManager) {
+
+    }
+
+    ngOnInit(): void {
+        cart = this.cartManager.getCartItems();
+    }
+}
+```
+
+```
+<div *ngFor="let item in cart">
+    {{ item.name }}
+    {{ item.price }}
+</div>
+```
+
+Although root is the default injector, you can also register with a module injector. Do so as below:
+
+```
+@Injectable({
+    providedIn: <name-of-module>
+})
+```
+
+You can also register the service directly in a module file as below:
+
+```
+@NgModule({
+    ...
+    providers: [<name-of-service>];
+})
+```
+
+A drawback to directly registering in the module Typescript files is that the service will be included in the application bundle regardless of if it is actually injected, whereas if the provider is registered in the service file, the service will not be included if it is not injected. This is known as being tree shakable.
+
+You can also register with a component injector by declaring the provider as below:
+
+```
+@Component({
+    ...
+    providers: [<name-of-service>];
+})
+```
+
+The service is a singleton unless configured otherwise. When injected, the component will search up the component tree, then up the module tree, and finally to the root injector, to find the service. Lastly, you can declare other fields in the providers object (acommodating factories, abstraction, etc.); documentation is [here](https://angular.io/guide/dependency-injection-providers).
+
+##### Pattern
+
+Angular documentation states registering with the root injector is preferable, unless you want the service to only be available to a specific module or component. The principle of least information may be appropriate in this case. For example, if a service is only used in one module, register it with that module's injector. Notes [here](https://angular.io/guide/providers).
 
 
