@@ -589,7 +589,7 @@ export class CartPresenter {
 
     cart: Array<Items>;
 
-    constructor(cartManager: CartManager) {
+    constructor(private cartManager: CartManager) {
 
     }
 
