@@ -237,13 +237,6 @@ The parent HTML template:
 <app-notification (notifier)='notify()'>
 ```
 
-## Services
-
-A Service allows one to persist information across Components and provide methods for each of the Components to use. Essentially, a Service lets you implement logic and save data, without being attached to an HTML template.
-
-- import service into Components using it
-- Create Service methods to be called, properties that can store Component data
-
 ## Directives
 
 There are three types of directives in the Angular framework: Components, structural directives, and attribute directives.
@@ -641,3 +634,126 @@ The service is a singleton unless configured otherwise. When injected, the compo
 Angular documentation states registering with the root injector is preferable, unless you want the service to only be available to a specific module or component. The principle of least information may be appropriate in this case. For example, if a service is only used in one module, register it with that module's injector. Notes [here](https://angular.io/guide/providers).
 
 
+## Asyncronous Application
+
+A synchronous application executes each function sequentially, waiting for each function to complete before executing the next function. An [asynchronous](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous) application executes at least one asynchronous function. An asynchronous function does not block the execution of the next function(s) within the application, while it is being executed. 
+
+The core benefit of an asynchronous web application is the user can still interact with it while it is awaiting the completion of a long-running task, such as a call for information from a backend server or a user file upload. An example: the user of an ecommerce application requests to see all the items in their cart. The cart items are stored on a server's database. Therefore, the application must retrieve the cart items from the database; this takes time. If the retrieval is synchronous, the application cannot accept any further requests until the retrieval is complete. If the retrieval is asynchronous, the application can accept further requests and execute functions to satisfy those requests, while it retrieving the cart items. The prime number array generator and XMLHTTPRequest [here](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing#synchronous_programming) are tangible examples of synchronous and asynchronous applications, respectively.
+
+The question is, how are multiple tasks started, worked on, and completed in the same time period, if Javascript is single-threaded (unclear to me if [still the case](https://stackoverflow.com/a/64647055) since ES6)? Single-threaded means there is one execution stack in the runtime environment, and the implication of this is that only one task can be started, worked on, and completed at a time. So in the above example, how can the application be requesting the user's cart items and acting on further user requests within the same time period (either [concurrently, in parallel, or both](https://jenkov.com/tutorials/java-concurrency/concurrency-vs-parallelism.html))? This [talk](https://www.youtube.com/watch?v=8aGhZQkoFbQ) attempts to explain, but in short, the Javascript application will pass task(s) to another runtime environment (in many cases the browser, through [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API), which supports multiple threads) to be executed.
+
+I do not yet fully understand the process, but high-level it seems to look like this: a task is passed to the browser, after completion its return (generally, or maybe always, is a function to be executed in the Javascript runtime environment) is placed in the task queue, and when the stack is empty, the event loop will place the task's return on the stack, to be executed.
+
+There are many libraries that provide non-blocking functions which call the aforementioned Web APIs to complete long-running tasks. A convention in traditional Javascript is to pass callbacks to these library functions. However, it should be known that a callback is not a prerequisite for these library functions to operate; an example is the [send method](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/send) from the fundamental XMLHTTPRequest class. Another point to note is that the callback pattern has largely been replaced with other patterns to be discussed later, so you can disregard callbacks if you'd like. Regardless, they were the convention, so I'll discuss them below: 
+
+### Callbacks
+
+The callback is a simple design pattern: parameterize a function that is called within another function. Below is an example:
+
+```
+function a(callbackb){
+    console.log('a');
+    callbackb();
+}
+
+function b(){
+    console.log('b');
+}
+
+a(b);
+```
+
+While executing the above, function a is entered, 'a' is logged to the console, the callback function (function b) is entered, 'b' is logged to the console, function b is exited, function a is exited. To perform another callback within b, you'd write the below:
+
+```
+function a(callbackb, callbackc){
+    console.log('a');
+    callbackb(callbackc);
+}
+
+function b(callbackc){
+    console.log('b');
+    callbackc();
+}
+
+function c(){
+    console.log('c');
+}
+
+a(b, c);
+```
+
+While executing the above, function a is entered, 'a' is logged to the console, function b is entered, 'b' is logged to the console, function c is entered, 'c' is logged to the console, function c is exited, function b is exited, function a is exited. As you can see, the number of parameters in the top-level function call scales 1:1 linearly with the number of callbacks. To avoid this, we can use anonymous functions. This is analogous to the first example in this section:
+
+```
+function a(callbackb){
+    console.log('a');
+    callbackb();
+}
+
+//a(function(){console.log('b');})
+//traditional formatting:
+a(function(){
+    console.log('b');
+})
+```
+
+While executing the above, function a is entered, 'a' is logged to the console, the anonymous function declared in function a input is entered, 'b' is logged to the console, the anonymous function declared in function a input is exited, function a is exited. Now, a replication of the second example in this section:
+
+```
+function a(callbackb){
+    console.log('a');
+    callbackb();
+}
+
+function b(callbackc){
+    console.log('b');
+    callbackc();
+}
+
+//a(function(){b(function(){console.log('c');})})
+//traditional formatting:
+a(function(){
+    b(function(){
+        console.log('c');
+    })
+})
+```
+
+As you can see, the number of parameters is now one. Some [disucssion](https://stackoverflow.com/questions/10273185/what-are-the-benefits-to-using-anonymous-functions-instead-of-named-functions-fo) on the use of anonymous functions as callbacks. Personally, I find this convention difficult to read. That being said, the below is valid, returns the same result, and does not use callbacks:
+
+```
+function a(){
+    console.log('a');
+    b();
+}
+
+function b(){
+    console.log('b');
+    c();
+}
+
+function c(){
+    console.log('c');
+}
+
+a();
+```
+
+Regardless, I will show an example below of an "asynchronous" function, setTimeout, that takes a callback. 
+
+```
+function a(){
+
+    setTimeout(() => {
+        console.log('a');
+    }, 1000)
+
+}
+
+a();
+```
+
+setTimeout uses the [setTimeout Web API](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout) that waits for the time specificed by the second function parameter (in milliseconds). After waiting is complete, the callback function is placed on the task queue, and it will be placed atop the execution stack when it is first in the queue and the execution stack is empty. It should be noted that setTimeout does not initiate the callback function when it itself is called.
+
+The issue with nested callbacks is many people find them difficult to understand. This is known as [callback hell](http://callbackhell.com/). 
