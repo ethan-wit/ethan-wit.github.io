@@ -151,14 +151,7 @@ The eventEmitter class of the Component module of angular/core allows you to cre
 
 ### Input Binding
 
-@Input allows a parent Component to pass data to a child Component. There are x number of actions you need to achieve this. You need an object in the parent Component, an object that has the same structure as the parent class object with the @Input decorator in the child Component, and a binding of the values in the parent Component HTML template (guide [here](https://angular.io/guide/property-binding#bind-values-between-components)). For example, below is the parent Component HTML template:
-
-```
-<div>
-<p>Parent Component div</p>
-<app-child-component [parentData]='dog'></app-child-component>
-</div>
-```
+@Input allows a parent Component to pass data to a child Component. There are 3 actions you need to achieve this. You need an object in the parent Component, an object that has the same structure as the parent class object with the @Input decorator in the child Component, and a binding of the values in the parent Component HTML template (guide [here](https://angular.io/guide/property-binding#bind-values-between-components)). Below is an example:
 
 Say the parent Component has a property object dog below, and we want the child Component to have access to it:
 
@@ -247,7 +240,7 @@ Angular has multiple built-in structural directives that allow a developer to in
 
 #### ngIf
 
-ngIf displays an element if the condition evaluates to true. ngIf can be evaluated against any valid Typescript expression. The example below would include the element. Someting to note -- this does not only hide the element, like the HTML hidden attribute, but actually includes or exclude it.
+ngIf displays an element if the condition evaluates to true. ngIf can be evaluated against any valid Typescript expression. The example below would include the element. Someting to note -- this does not only hide the element, like the HTML hidden attribute, but actually includes or exclude it from the DOM.
 ```
 determineIfInclude: boolean = true;
 ```
@@ -275,7 +268,7 @@ The asterisk before ngIf is the short-hand form of the syntax. Without this, the
 ngIf also allows for else logic, using ng-template as the element to include if the else condition is reached. Below is an example of the else element being included.
 
 ```
-determinIfInclude: boolean = false; 
+determineIfInclude: boolean = false; 
 ```
 
 ```
@@ -307,7 +300,7 @@ dataStructure: Array<string> = ["first", "second", "third"]
 </div>
 ```
 
-ngFor can be used with ngIf to include elements in the data structure, with additional logic; see example below.
+ngFor can be used with ngIf to include elements in the data structure, dependent on some additional logic. See the example below.
 
 ```
 <div *ngFor="let item in dataStructure">
@@ -410,7 +403,7 @@ val: number = 10;
 
 ```
 <div>
-    {{val | add-num:5:10}}
+    {{val | add-sub-num:5:10}}
 </div>
 ```
 
@@ -423,7 +416,7 @@ Pipes are pure by default, although they can also be set to impure, as shown bel
 })
 ```
 
-A pure pipe is rerendered only when Angular detects a change to the value or parameters of the pipe. This excludes when the value is an object and one of its properties are changed. However, it would rerender if the value is assigned to a new object. It also excludes adding a new item to an Array that is the value. Impure pipes rerender upon a change to any state change in the Angular application, which forces more computation on the machine running the application. One other note of importance, is that pure pipes can be reused, while each time an impure pipe is applied, a new pipe instance will be created. 
+A pure pipe is rerendered only when Angular detects a change to the value or parameters of the pipe. This excludes when the value is an object and one of its properties are changed. However, it would rerender if the value is assigned to a new object. It also excludes adding a new item to an Array that is the value. Impure pipes rerender upon a change to any state change in the Angular application, which forces more computation on the machine running the application. One other note of importance: pure pipes can be reused, while each time an impure pipe is applied, a new pipe instance will be created. 
 
 ### Custom Directives
 
@@ -501,7 +494,7 @@ The flow of information between components and finally to the user can be confus
 
 ### Modules
 
-Angular provides another entity to more clearly separate the components of the application: the module. Each Angular application is configured with a root module, app.module.ts, with the associated app directory in src. Feature modules are prevalent in larger Angular applications, which represent a collection of Angular artifacts (e.g. pipes, directives, componenets) aligned to a domain or workflow, such as inventory, cart, and checkout in a web store. You create another module, like a feature module (given its own directory with associated Typescript file within app), by executing the command below:
+Angular provides another entity to more clearly separate the components of the application: the module. Each Angular application is configured with a root module, app.module.ts, with the associated app directory in src. Feature modules are prevalent in larger Angular applications, which represent a collection of Angular artifacts (e.g. pipes, directives, componenets) aligned to a domain or workflow, such as inventory, cart, or checkout in a web store. You create another module, like a feature module (given its own directory with associated Typescript file within app), by executing the command below:
 
 ```
 ng generate module <name-of-module>
@@ -529,7 +522,7 @@ ng <name-of-command> --configuration=<name-of-environment>
 
 ### Dependency Injection
 
-Dependency injection is a simple design pattern: pass **instantiated** objects (dependencies) to the object constructor, as opposed to instantiating objects (dependencies) within the object. Angular components are responsible for one task: presenting content to the client. This does not include retrieving data from a database or executing complex business logic. The later two tasks, and any others that are not presentation-centric, are delegated to another Angular entity: services. Dependency injection allows us to decouple objects and implement unit tests with mocking.
+Dependency injection is a simple design pattern: pass **instantiated** objects (dependencies) to the object constructor, as opposed to instantiating objects (dependencies) within the object. Angular components are responsible for one task: presenting content to the client. This does not include retrieving data from a database or executing complex business logic. The later two tasks, and any others that are not presentation-centric, are delegated to another Angular entity: services. Dependency injection allows us to decouple objects and more easily implement unit tests with mocking.
 
 #### Services
 
@@ -756,4 +749,50 @@ a();
 
 setTimeout uses the [setTimeout Web API](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout) that waits for the time specificed by the second function parameter (in milliseconds). After waiting is complete, the callback function is placed on the task queue, and it will be placed atop the execution stack when it is first in the queue and the execution stack is empty. It should be noted that setTimeout does not initiate the callback function when it itself is called.
 
-The issue with nested callbacks is many people find them difficult to understand. This is known as [callback hell](http://callbackhell.com/). 
+The issue with nested callbacks is many people find them difficult to understand. This is known as [callback hell](http://callbackhell.com/). To provide an alternative to nested callbacks, the Promise class was introduced in 2015 with ES6.
+
+### Promises
+
+The Promise class allows you to chain asynchronous function calls (dependent on success or failure of the long-running task(s)) as opposed to nesting callbacks.
+
+A Promise constructor takes a callback function, called an executor. The executor performs some long-running task, defined by the programmer. The executor takes in two other positional callback functions, generally named resolve and reject. These functions are defined by the Promise. The programmer calls the resolve function upon a successful result from the long-running task, otherwise, they call the reject function. The Promise constructor returns another Promise. Below is an example of the Javascript syntax:
+
+```
+a = function() {
+
+    return new Promise((resolve, reject) => {
+
+        //long-running task (generally asynchronous)
+        setTimeout(() => {
+
+            //randomly get true or false
+            randomBoolean = Math.random() < 0.5;
+
+            if (randomBoolean) {
+                resolve(randomBoolean);
+            } else {
+                reject();
+            }
+
+        }, 5000)
+
+    })
+}
+```
+
+The Promise constructor returns another Promise; this allows you to chain functions that act on successive Promises, using the then and catch methods. The then method can take two callback functions, the first is executed if the resolve function is executed in the constructor, and the second is executed if the reject function is executed in the constructor.
+
+In the above example it appears that the resolve and reject functions do not serve any purpose. However, when a then method is chained to the promise, the parameter passed to resolve/reject function is available as the parameter to the associated function in the then method. This allows you to pass the promised information from the asynchronous function to the downstream functions. Below is an example:
+
+```
+promise = a();
+
+secondPromise = promise.then((asyncReturn) => {console.log(asyncReturn); return asyncReturn;}, () => {console.log('failure')})
+```
+
+If the resolve function is executed, the randomBoolean is passed to the promise object callback, and I decided to call it asyncReturn. Something to note: if you want to pass an object from a then method callback, you return the object, and the next then method has access to it. See below:
+
+```
+thirdPromise = secondPromise.then((secondAsyncReturn) => {console.log(secondAsyncReturn)};)
+```
+
