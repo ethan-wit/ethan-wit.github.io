@@ -780,9 +780,9 @@ a = function() {
 }
 ```
 
-The Promise constructor returns another Promise; this allows you to chain functions that act on successive Promises, using the then and catch methods. The then method can take two callback functions, the first is executed if the resolve function is executed in the constructor, and the second is executed if the reject function is executed in the constructor.
+The Promise constructor returns another Promise; this allows you to chain functions that act on successive Promises, using the then and catch methods. The then method can take two callback functions, the first is executed if the resolve function is executed in the constructor, and the second is executed if the reject function is executed in the constructor. The initial Promise is executed synchronously (but its callback generally executes an asynchronous function anyway), and the chained then/catch methods all executed asynchronously.
 
-In the above example it appears that the resolve and reject functions do not serve any purpose. However, when a then method is chained to the promise, the parameter passed to resolve/reject function is available as the parameter to the associated function in the then method. This allows you to pass the promised information from the asynchronous function to the downstream functions. Below is an example:
+In the above example it appears that the resolve and reject functions do not serve any purpose. However, when a then method is chained to the Promise, the parameter passed to resolve/reject function is available as the parameter to the associated function in the then method. This allows you to pass the promised information from the asynchronous function to the downstream functions. Below is an example:
 
 ```
 promise = a();
@@ -795,4 +795,35 @@ If the resolve function is executed, the randomBoolean is passed to the promise 
 ```
 thirdPromise = secondPromise.then((secondAsyncReturn) => {console.log(secondAsyncReturn)};)
 ```
+
+### Observables
+
+The observer pattern is the modern/"reactive" way of utilizing asynchronous functions, and it is provided by the RxJS library. An Observable is a class that takes a callback; the callback takes an object. When the Observable's subsribe method is executed, the Observable's callback is executed. Per the RxJS [documentation](https://rxjs.dev/guide/observable#subscribing-to-observables), "It is not a coincidence that observable.subscribe() and subscribe in new Observable(function subscribe(subscriber) {...}) have the same name. In the library, they are different, but for practical purposes you can consider them conceptually equal." The callback's object parameter, known as an observer (or subscriber), declares at least one of three functions: next, error, or complete. Below is an example:
+
+```
+import { Observable } from 'rxjs';
+
+observer = {
+    next(parameter){console.log(parameter)},
+    error(parameter){console.log(parameter)},
+    complete(){console.log('complete')}
+}
+
+observable$ = new Observable((observerObject) => {
+
+    observerObject.next('a');
+    
+    setTimeout(() => {
+        observerObject.complete();
+    }, 0)
+
+    observerObject.next('b');
+
+})
+
+observable$.subscribe(observer)
+```
+
+The $ postfix is a convention to identify an attribute as an Observable. The error or complete functions may be called only once. Something to note: if the observer declares an anonymous function (TODO).
+
 
