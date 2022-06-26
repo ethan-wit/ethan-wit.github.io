@@ -80,27 +80,6 @@ Serve an Angular app by executing the below in the Angular CLI:
 ng serve
 ```
 
-## Routing
-
-
-Routing allows one to present Components based on the application URL path. When generating a new Angular app, you have the option to add Angular routing or not. The below works for choosing not to include Angular routing; it's counterintuitive, but you can perform routing with this configuration. A useful and official guide can be found [here](https://angular.io/guide/router-tutorial). First, the index.html file should have the app-root and the app.component.html file should have the router-outlet tag, as per the Directory Structure section above. Create a new child Component, as per the directions above. After doing so, alter the app.module.ts file to include the routing configuration below:
-
-```
-@NgModule({
-    imports([
-        {path: '', component: 'AppComponent'}, \\The AppComponent is presented at the base URL
-        {path: 'child', component: 'ChildComponent'} \\The ChildComponent is presented when \child is appended to the base URL 
-    ])
-})
-```
-
-You can replace the AppComponent with a child Component, if you'd like that to be shown at the base URL. TODO: include redirects. If you'd like to include a link to another Component's URL, you can include the below in an HTML template (routerLink value is the other Component's URL from the base):
-
-```
-<a [routerLink]="other">Link to other</a>
-```
-
-
 ## Binding
 
 Binding allows one to pass information between the files in a Component, or between Components. Property binding lets one assign HTML object properties from the Typescript file, event binding lets one call a Typescript method from an action on the HTML template, and the @Input and @Output decorators let one pass information between Components.
@@ -988,6 +967,46 @@ ngOnInit() {
 TODO: HTTPClient error handling, HTTP Interceptors, async pipe
 
 
+## Routing
+
+A route is simply a key-value pair relating the name of the route to its component. When the route key is appended to the web application's base URL (e.g. ```https://website.com/<route>```), the associated component is rendered in place of the RouterOutlet directive's selector, ```<router-outlet></router-outlet>```. The base URL of the web application is declared in the base element of the head element in index.html; to do so, the href property is set to the base directory of the web application:
+
+```
+<html>
+    <head>
+        <base href="/">
+    </head>
+</html>
+```
+
+The RouterModule from the @angular/router library is generally imported in the root module of the application, and it provides you Angular artifacts to perform routing (e.g. RouterOutlet).
+
+```
+import { RouterModule } from '@angular/router';
+
+@NgModule({
+    imports: [
+        RouterModule.forRoot(routes)
+    ]
+})
+```
+The forRoot method is executed to enforce the singleton patter on RouterModule, meaning it is instantiated only once. The routes variable declares the route key-value pairs:
+
+```
+const routes: Routes = [
+    {path: '', component: <name-of-component>},
+    {path: '\items', component: <name-of-items-component>},
+    {path: '**', component: <name-of-page-not-found-component>}
+]
+```
+
+The empty string route is replaces the router-outlet at the base URL. The special ** route replaces the router-outlet whenever an unknown route is appended to the base URL. Generally, the router-outlet selector is placed in app.component.html, sandwiched between header and footer selectors:
+
+```
+<app-header></app-header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+```
 
 
 
