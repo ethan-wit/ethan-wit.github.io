@@ -821,9 +821,173 @@ observable$ = new Observable((observerObject) => {
 
 })
 
-observable$.subscribe(observer)
+observable$.subscribe(observer);
 ```
 
-The $ postfix is a convention to identify an attribute as an Observable. The error or complete functions may be called only once. Something to note: if the observer declares an anonymous function (TODO).
+The $ postfix is a convention to identify an attribute as an Observable. The error or complete functions may be called only once; no further next executions will be completed after error or complete is executed. An important note: subscriptions to observables will not be destroyed unless they are programmed to do so. The subscribe method returns a Subscription object, which can be unsubscribed from (which performs the destruction). Taking from the above example:
+
+```
+subscription = observable$.subscribe(observer);
+subscription.unsubscribe();
+```
+
+#### Operators
+
+A (creational) [operator](https://rxjs.dev/guide/operators) is a function that creates an Observable instance, without explicitly calling ```new Observable```. RxJS provides many operators for specific Observable use cases. An example is the ```of``` operator, that passes each operator parameter to the observer function:
+
+```
+ofOperator = of(4, 5, 6)
+ofOperator.subscribe((ofParameter) => {console.log(ofParameter)})
+```
+
+The pipe method allows you to chain operators. The fromEvent operater allows you to call an observer function when an event occurs in an element or component. The ViewChild decorator facilitates the observation through creating a Typescript attribute associated with the element/component. The map operator allows you to chain further operators prior to the observer function is called when the subscribe method is executed. An example using the fromEvent and map operators below:
+
+```
+<input type="number" #numberInput></input>
+```
+
+```
+//{static: true} declares the element is available on init
+@ViewChild('numberInput', {static: true}) numberInput: ElementRef;
+
+fromEventOperator = fromEvent(this.numberInput.nativeElement, 'keyup')
+
+fromEventOperator.pipe(map((evt: KeyboardEvent) => 2*evt.key), map((x) => 3*x)).subscribe((y) => {console.log(y)})
+```
+
+#### Asynchronous HTTP
+
+##### XMLHttpRequest
+
+Below is an example of implementing the XMLHttpRequest GET method within an observable:
+
+```
+requestObservable$ = new Observable((observer) => {
+
+    request = new XMLHttpRequest();
+    httpEventEmitter = request.eventEmitter;
+
+    if (httpEventEmitter.status == 4 && httpEventEmitter.responseCode == 200) {
+        observer.next(request.responseText)
+        observer.complete()
+    } else {
+        observer.error(request.error)
+    }
+
+    request.open('GET', 'https://someURL.org/info')
+    request.send()
+});
+
+observer = {
+    next: (response) => {console.log(response)},
+    error: (error) => {console.log(error)},
+    complete: () => {console.log('http request complete')};
+}
+
+subscription = requestObservable$.subscribe(observer);
+subscription.unsubscribe();
+```
+
+##### HttpClient GET
+
+However, directly using the XMLHttpRequest class is not necessary, because Angular provides a well constructed service that makes HTTP request implementation simpler. The service is called HttpClient, and its request methods (GET, POST, PUT, DELETE) execute asynchronously. Generally, the service is injected in an http service that you write for your application, the HttpClient request method is used in a method within your http service, and then your http service/method is injected/executed in a component. Below is an example of a GET request implemented in a service related to items in a web shop.
+
+The HttpClient request methods require a type to be declared for the data that is received. Therefore, an interface "model" (per model-view-controller) is established for non-primitive types in the item.ts file in the models folder:
+
+```
+interface Item = {
+    id: number;
+    name: string;
+    price: number;
+}
+```
+
+Now, the service is built:
+
+```
+import { HttpClient } from '@angular/core/http';
+import { Item } from 'models/item';
+
+@Injectable({
+    providedIn: 'root'
+}) 
+export class itemsHttpService {
+
+    url: string = 'https://webshop.com/items';
+
+    constructor (private http: HttpClient){
+
+    }
+
+    getItems(url): Observable<Item[]> {
+        return this.http.get<Item[]>(this.url);
+    }
+
+}
+```
+
+The HttpClient request methods do not directly return the data received; instead, they return an Observable that, when subscribed to, provides the observer with the data. So, the component that presents items to the customer injects the service and subscribes to the Observable:
+
+```
+<div>
+    <div *ngFor="'let item of items'">
+        {{ item.name }}
+        {{ item.price }}
+    </div>
+</div>
+```
+
+```
+import { Item } from 'models/item';
+
+@Component({
+    selector: 'items',
+    templateUrl: 'items.html'
+}) 
+export class items {
+
+    items: Item[];
+
+    constructor(private httpService: itemsHttpService) {
+        
+    }
+
+    ngOnInit() {
+        this.getItems().subscribe((items) => {this.items = items});
+    }
+
+    getItems() {
+        return this.httpService.getItems();
+    }
+
+}
+```
+
+##### HttpClient POST
+
+You can also send information (called a payload) to an API endpoint; one method to do so is the POST request. Below, I add a POST method that requests to add an item to the imagined API's database. 
+
+```
+addItem(additionalItem: Item): Observable<Item> {
+    return this.httpClient.post<Item>(this.url, additionalItem);
+}
+```
+
+```
+additionalItem: Item = {
+    id: 3;
+    name: 'HAV map';
+    price: 17
+}
+
+ngOnInit() {
+    this.httpService.addItem(additionalItem).subscribe((additionalItem) => {console.log('${additionalItem} added successfully')});
+}
+```
+
+TODO: HTTPClient error handling, HTTP Interceptors, async pipe
+
+
+
 
 
