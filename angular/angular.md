@@ -979,28 +979,38 @@ A route is simply a key-value pair relating the name of the route to its compone
 </html>
 ```
 
-The RouterModule from the @angular/router library is generally imported in the root module of the application, and it provides you Angular artifacts to perform routing (e.g. RouterOutlet).
+When creating a new application through the Angular CLI, you are prompted to answer y or n to this question: "Do you want to add routing to your app?". If you answer n, the RouterModule from the @angular/router library is imported in the root module of the application. If you answer y, an app-routing.module.ts file is generated in the app directory, the RouterModule is imported there, the AppRoutingModule class is exported from app-routing.module.ts, and it is imported into the root module. Perhaps counterintuitively, the only difference between y and n is whether there is a separate file to manage routes in the app directory; if not, routes are still enabled and usable, they are just declared directly in the root module. The RoutingModule provides you Angular artifacts to perform routing (e.g. RouterOutlet). Below is an example of the app-routing-module.ts file (answered y):
 
 ```
 import { RouterModule } from '@angular/router';
+
+const routes: Routes = [
+    {path: '', component: <name-of-component>},
+    {path: '\items', component: <name-of-items-component>},
+    {path: '**', component: <name-of-page-not-found-component>}
+]
 
 @NgModule({
     imports: [
         RouterModule.forRoot(routes)
     ]
 })
-```
-The forRoot method is executed to enforce the singleton patter on RouterModule, meaning it is instantiated only once. The routes variable declares the route key-value pairs:
-
-```
-const routes: Routes = [
-    {path: '', component: <name-of-component>},
-    {path: '\items', component: <name-of-items-component>},
-    {path: '**', component: <name-of-page-not-found-component>}
-]
+export class AppRoutingModule {}
 ```
 
-The empty string route is replaces the router-outlet at the base URL. The special ** route replaces the router-outlet whenever an unknown route is appended to the base URL. Generally, the router-outlet selector is placed in app.component.html, sandwiched between header and footer selectors:
+Which is then imported into the root module:
+
+```
+import { AppRoutingModule } from './app-routing.module.ts';
+
+@NgModule({
+    imports: [
+        AppRoutingModule
+    ]
+})
+```
+
+The forRoot method is executed to enforce the singleton patter on RouterModule, meaning it is instantiated only once. The routes variable declares the route key-value pairs. The empty string route replaces the router-outlet at the base URL. The special ** route replaces the router-outlet whenever an unknown route is appended to the base URL. Generally, the router-outlet selector is placed in app.component.html, placed between header and footer selectors:
 
 ```
 <app-header></app-header>
@@ -1008,5 +1018,51 @@ The empty string route is replaces the router-outlet at the base URL. The specia
 <app-footer></app-footer>
 ```
 
+### Navigation
 
+The developer can provide links to routes by setting the routerLink directive in an HTML a element. An example is below:
+
+```
+itemsRoute = '\items'
+```
+
+```
+<div>
+    <a [routerLink]='itemsRoute'>Items</a>
+</div>
+```
+
+When the user clicks the Items link, the component associated with the items route key will be rendered in place of router-outlet. If you'd like to hard code the route key, just remove the brackets:
+
+```
+<div>
+    <a routerLink='\items'>Items</a>
+</div>
+```
+
+Something to note: routerLink requires the backslash before the route, while the RouterModule forRoot method does not.
+
+### Feature Routing
+
+As mentioned in the Application Structure section, feature modules are a recommended pattern to separate responsibilities within an Angular application. You may also generate a routing file (same idea as app-routing.module.ts) for each feature module, by including the --routing argument in the following command:
+
+```
+ng generate module items --routing
+```
+
+An items-routing.module.ts file will be generated in the items directory, and you add routes to the RouterModule using the forChild method:
+
+```
+const routes: Routes = [
+    {path: 'items', component: <name-of-items-component>}
+]
+
+@NgModule({
+    imports: [
+        RouterModule.forChild(routes)
+    ]
+})
+```
+
+The ItemsRoutingModule class from items-routing.module.ts is exported/imported to the items.module.ts file, and the ItemsModule is then imported in the root module. Routing takes a first-match approach, therefore it may be **important** to import ItemsModule before AppRoutingModule in the root module, so that more specific routes are matched before more generic routes (e.g. more specific: 'items/10034', more generic: 'items', even more generic: 'item').
 
