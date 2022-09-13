@@ -4,32 +4,6 @@
 
 ---
 
-## Software
-
-### [SEC Fund Data Extractor](https://ethan-wit.github.io/sec_fund_data_extractor.html)
-
-CLI app that extracts mutual fund data from SEC filings; written in Python, with a sqlite database.
-
-### [Payment Terms Value Calculator](http://paymenttermsvaluecalculator-env.eba-dgms7m2x.us-east-2.elasticbeanstalk.com/)
-
-Web app that decides the most favorable contract from a set of [payment terms](https://ethan-wit.github.io/procurement_files/PTOM.html); written in Python and deployed on AWS.
-
-### [Moving Items](https://github.com/ethan-wit/moving-items)
-
-CLI CRUD app that allows users to track items they wish to bring while moving; written in Python, with a sqlite database.
-
-### [Outlook Attachment](https://ethan-wit.github.io/outlook_attachment_getter.html)
-
-Python module that gets Outlook attachments, unzips if necessary, and saves to disk.
-
-### [Python Problem Sets](https://ethan-wit.github.io/Python_Problem_Sets.html)
-
-Problem sets developed to teach core programming concepts in Python.
-
-### [Notes & Guides](https://ethan-wit.github.io/software_notes.html)
-
-Notes and guides on various software items: Angular, Typescript, Xubuntu, AWS, etc.
-
 ## White Papers
 
 ### [T+1 Fund Cash Flow Modeling](https://ethan-wit.github.io/fund_t+1_cash_flow_prediction_documentation.html)
@@ -47,10 +21,6 @@ Outlining the models that attempt to explain the determinants of economic growth
 ### [Graph Theory in Macroeconomics](https://ethan-wit.github.io/macro_graph.html)
 
 Illustrating the flow of goods and services between sectors in the United States's macroeconomy using graph theory.
-
-### [Display Advertisement SEM](https://ethan-wit.github.io/SEM_Display_Advertising.pdf)
-
-Estimating display advertisement equilibrium price using two-stage least squares and SEM.
 
 ### [Procurement](https://ethan-wit.github.io/Procurement.html)
 
