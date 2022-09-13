@@ -30,7 +30,7 @@ Whitepapers covering aspects of procurement -- the act of obtaining goods or ser
 
 ### [Electronic Device Bans and Academic Performance: New York City Public Schools](https://ethan-wit.github.io/EDB_NYC_AP.html)
 
-Measures the impact of the New York City Department of Education lifting their electronic device ban on school academic performance.
+Measures the impact of the New York City Department of Education lifting their electronic device ban on schools' academic performance.
 
 ## Coursework
 
