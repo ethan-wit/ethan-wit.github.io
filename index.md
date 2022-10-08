@@ -4,6 +4,24 @@
 
 ---
 
+## Software
+
+### [SEC Fund Data Extractor](https://ethan-wit.github.io/sec_fund_data_extractor.html)
+
+CLI app that extracts mutual fund data from SEC filings; written in Python, with a sqlite database.
+
+### [Moving Items](https://github.com/ethan-wit/moving-items)
+
+CLI CRUD app that allows users to track items they wish to bring while moving; written in Python, with a sqlite database.
+
+### [Python Problem Sets](https://ethan-wit.github.io/Python_Problem_Sets.html)
+
+Problem sets developed to teach core programming concepts in Python.
+
+### [Notes & Guides](https://ethan-wit.github.io/software_notes.html)
+
+Notes and guides on various software items: Angular, Typescript, Xubuntu, AWS, etc.
+
 ## White Papers
 
 ### [T+1 Fund Cash Flow Modeling](https://ethan-wit.github.io/fund_t+1_cash_flow_prediction_documentation.html)
