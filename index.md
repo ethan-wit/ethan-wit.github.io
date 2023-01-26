@@ -4,6 +4,12 @@
 
 ---
 
+## Software
+
+### [SEC Fund Data Extractor](https://ethan-wit.github.io/sec_fund_data_extractor.html)
+
+CLI app that extracts mutual fund data from SEC filings; written in Python, with a sqlite database.
+
 ### [Moving Items](https://github.com/ethan-wit/moving-items)
 
 CLI CRUD app that allows users to track items they wish to bring while moving; written in Python, with a sqlite database.
