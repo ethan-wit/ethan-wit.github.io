@@ -1,4 +1,4 @@
-# SEC Fund Data Extractor
+# invact
 [Homepage](https://ethan-wit.github.io)
 
 ---
